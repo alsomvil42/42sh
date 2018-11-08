@@ -6,7 +6,7 @@
 /*   By: mjose <mjose@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/19 17:20:04 by mjose             #+#    #+#             */
-/*   Updated: 2018/10/31 05:26:02 by mjose            ###   ########.fr       */
+/*   Updated: 2018/11/08 17:44:11 by mjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ int		test_existence_and_clean(t_proc *proc, char *tmp_path, char *tmp_com)
 		return (1);
 	}
 	ft_strdel(&tmp_path);
+	return (0);
+}
+
+int		exit_proc(pid_t father)
+{
+	kill(father, SIGINT);
 	return (0);
 }
 
@@ -43,8 +49,11 @@ void	exec_child_command_path(t_com *com, t_env *env, t_proc *proc)
 			{
 				if ((father = fork()) == 0)
 					execve(tmp_path, com->tab_command, env->tab_env);
-				ft_strdel(&tmp_path);
+				signal(SIGINT, SIG_IGN);
 				wait(&proc->stat_process);
+//				if (WIFSIGNALED(proc->stat_process))
+//					ft_putchar_fd('\n', STDIN_FILENO);
+				ft_strdel(&tmp_path);
 				free(tmp_com);
 				return ;
 			}
@@ -95,7 +104,13 @@ void	exec_command(t_env *env, t_prompt *prompt, t_com *com, t_proc *proc)
 		exec_child(com, env, proc);
 		prompt->have_line = 0;
 		ft_strdel(&prompt->line);
-		if (WIFEXITED(proc->stat_process))
+		if (WIFSIGNALED(proc->stat_process))
+		{
+			ft_putchar('\n');
+			put_prompt(env, prompt);
+				signal(SIGINT, SIG_DFL);
+		}
+		else if (WIFEXITED(proc->stat_process))
 			put_prompt(env, prompt);
 	}
 	rmv_comtab(com);

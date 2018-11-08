@@ -6,7 +6,7 @@
 #    By: mjose <mjose@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/26 18:25:27 by mjose             #+#    #+#              #
-#    Updated: 2018/10/31 05:53:20 by mjose            ###   ########.fr        #
+#    Updated: 2018/11/08 17:38:22 by mjose            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ BEGIN_LINE = \033[A
 CC = gcc
 CC_FLAGS = -Wall -Wextra -Werror \
 			-g \
-			-O1 -g -fsanitize=address	\
+#			-O1 -g -fsanitize=address	\
 			-fno-omit-frame-pointer		\
 			-fsanitize-address-use-after-scope \
 

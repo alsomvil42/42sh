@@ -6,7 +6,7 @@
 /*   By: mjose <mjose@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/14 17:49:46 by mjose             #+#    #+#             */
-/*   Updated: 2018/10/31 05:24:57 by mjose            ###   ########.fr       */
+/*   Updated: 2018/11/08 12:19:16 by mjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "../libft/includes/get_next_line.h"
 # include <stdio.h>
 # include <sys/stat.h>
+# include <signal.h>
 
 # define NAME_SHELL "MINISHELL"
 # define VERSION "v.1.beta.01"
